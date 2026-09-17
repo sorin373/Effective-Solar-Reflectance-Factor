@@ -49,6 +49,8 @@ struct Result
     double standard_error;
 };
 
+std::ofstream convergents("results/convergence.csv");
+
 Result run_monte_carlo(Solver &solver, const std::vector<SolarPoint> &solar_spectrum, unsigned int N, unsigned int seed)
 {
     std::ofstream csv("results/final_samples.csv");
@@ -81,9 +83,6 @@ Result run_monte_carlo(Solver &solver, const std::vector<SolarPoint> &solar_spec
 
     csv.close();
 
-    csv.open("results/convergence.csv");
-    csv << "N,mean,std,p05,median,p95\n";
-
     std::sort(values.begin(), values.end());
 
     double mean = sum / static_cast<double>(N);
@@ -95,8 +94,7 @@ Result run_monte_carlo(Solver &solver, const std::vector<SolarPoint> &solar_spec
     unsigned int i50 = static_cast<unsigned int>(0.50 * (N - 1));
     unsigned int i95 = static_cast<unsigned int>(0.95 * (N - 1));
 
-    csv << N << "," << mean << "," << std_dev << "," << values[i05] << "," << values[i50] << "," << values[i95] << '\n';
-    csv.close();
+    convergents << N << "," << mean << "," << std_dev << "," << values[i05] << "," << values[i50] << "," << values[i95] << '\n';
 
     return {mean, std_dev, values[i05], values[i50], values[i95], std_error};
 }
@@ -158,19 +156,23 @@ int main()
     Solver solver(surfaces, materials);
     solver.prepare_solar_spectrum(solar_spectrum);
 
-    const unsigned int N = 100000;
     const unsigned int seed = 12345;
 
-    Result result = run_monte_carlo(solver, solar_spectrum, N, seed);
+    convergents << "N,mean,std,p05,median,p95\n";
 
-    std::cout << "\n===== FINAL REFLECTANCE ANALYSIS =====\n";
-    std::cout << "N = " << N << '\n';
-    std::cout << "Mean R = " << result.mean << '\n';
-    std::cout << "Std dev = " << result.std_dev << '\n';
-    std::cout << "P05 = " << result.p05 << '\n';
-    std::cout << "Median = " << result.median << '\n';
-    std::cout << "P95 = " << result.p95 << '\n';
-    std::cout << "Standard error of mean = " << result.standard_error << '\n';
+    for (const unsigned int N : {10, 100, 1000, 10000, 100000})
+    {
+        Result result = run_monte_carlo(solver, solar_spectrum, N, seed);
+    
+        std::cout << "N = " << N << '\n';
+        std::cout << "Mean R = " << result.mean << '\n';
+        std::cout << "Std dev = " << result.std_dev << '\n';
+        std::cout << "P05 = " << result.p05 << '\n';
+        std::cout << "Median = " << result.median << '\n';
+        std::cout << "P95 = " << result.p95 << '\n';
+        std::cout << "Standard error of mean = " << result.standard_error << '\n';
+        std::cout << "===========================================================\n\n";
+    }
 
     std::vector<std::pair<std::string, Vec3>> test_dirs = {
         {"+X face illuminated", {-1.0,  0.0,  0.0}},
@@ -194,6 +196,8 @@ int main()
 
         std::cout << name << " : q = " << R_eff << '\n';
     }
+
+    convergents.close();
 
     return 0;
 }

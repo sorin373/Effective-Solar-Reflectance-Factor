@@ -102,6 +102,34 @@ namespace sim
         throw std::runtime_error("Material ID not found: " + std::to_string(material_ID));
     }
 
+    Complex Solver::get_refractive_index(const Material& material, double wavelength_nm)
+    {
+        const std::vector<OpticalPoint>& curve = material.optical_curve;
+
+        if (curve.empty())
+            throw std::runtime_error("Empty optical curve.");
+
+        if (wavelength_nm < curve.front().wavelength_nm || wavelength_nm > curve.back().wavelength_nm)
+            throw std::runtime_error("Requested wavelength outside optical curve range.");
+
+        for (std::size_t i = 0, N = curve.size(); i + 1 < N; ++i)
+        {
+            const OpticalPoint& a = curve[i], b = curve[i + 1];
+            
+            if (wavelength_nm >= a.wavelength_nm && wavelength_nm <= b.wavelength_nm)
+            {
+                double t = (wavelength_nm - a.wavelength_nm) / (b.wavelength_nm - a.wavelength_nm);
+
+                double n = a.n + t * (b.n - a.n);
+                double kappa = a.kappa + t * (b.kappa - a.kappa);
+
+                return Complex{n, kappa};
+            }
+        }
+
+        throw std::runtime_error("Interpolation failed.");
+    }
+
     void Solver::prepare_solar_spectrum(const std::vector<SolarPoint>& solar_spectrum)
     {
         _prepared_materials.clear();
@@ -128,33 +156,6 @@ namespace sim
                 return material;
 
         throw std::runtime_error("Prepared material not found: " + std::to_string(material_ID));
-    }
-
-    Complex Solver::get_refractive_index(const Material& material, double wavelength_nm)
-    {
-        const std::vector<OpticalPoint>& curve = material.optical_curve;
-
-        if (curve.empty())
-            throw std::runtime_error("Empty optical curve.");
-
-        if (wavelength_nm < curve.front().wavelength_nm || wavelength_nm > curve.back().wavelength_nm)
-            throw std::runtime_error("Requested wavelength outside optical curve range.");
-
-        for (std::size_t i = 0, N = curve.size(); i + 1 < N; ++i)
-        {
-            const OpticalPoint& a = curve[i], b = curve[i + 1];
-            
-            if (wavelength_nm >= a.wavelength_nm && wavelength_nm <= b.wavelength_nm)
-            {
-                double t = (wavelength_nm - a.wavelength_nm) / (b.wavelength_nm - a.wavelength_nm);
-                double n = a.n + t * (b.n - a.n);
-                double kappa = a.kappa + t * (b.kappa - a.kappa);
-
-                return Complex{n, kappa};
-            }
-        }
-
-        throw std::runtime_error("Interpolation failed.");
     }
 
     double Solver::get_surface_R(const Surface& surface, std::size_t spectral_index)

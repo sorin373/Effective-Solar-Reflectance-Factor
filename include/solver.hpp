@@ -106,6 +106,9 @@ namespace sim
         const std::vector<Surface>& get_surfaces() const noexcept 
         { return this->_surfaces; }
 
+        const std::vector<Material>& get_materials() const noexcept
+        { return this->_materials; }
+
         void set_direction(const Vec3& direction)
         { this->_k_i = direction; }
 
