@@ -1,8 +1,5 @@
 # Effective Solar Reflectance Factor — ROSPIN-SAT-1
 
-**Author:** Sorin Tudose  
-**Project:** ROSPIN-SAT-1
-
 ## Overview
 
 This repository contains the numerical implementation used to determine the effective solar reflectance factor of the ROSPIN-SAT-1 spacecraft for solar-radiation-pressure analysis.
