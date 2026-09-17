@@ -35,17 +35,17 @@ namespace sim
 
     struct OpticalPoint
     {
-        double wavelength_nm;
-        double n;
-        double kappa;
+        double wavelength_nm = 0.0;
+        double n = 0.0;
+        double kappa = 0.0;
     };
 
     std::vector<OpticalPoint> load_optical_curve(const char *filename);
 
     struct SolarPoint
     {
-        double wavelength_nm;
-        double irradiance;
+        double wavelength_nm = 0.0;
+        double irradiance = 0.0;
     };
 
     std::vector<SolarPoint> load_solar_spectrum(const char *filename, double lambda_min_nm, double lambda_max_nm);

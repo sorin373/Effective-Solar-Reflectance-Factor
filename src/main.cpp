@@ -122,33 +122,33 @@ int main()
     };
 
     const std::vector<Surface> surfaces = {
-        {"Main Back Plate", 3, 18472.4801 - 7380.0363 - 6361.2203, dir::PY},
+        {"Main Back Plate",              3, 18472.4801 - 7380.0363 - 6361.2203, dir::PY},
 
-        {"Back Plate (COM)", 1, 7380.0363, dir::PY},
-        {"Shield (COM)", 2, 6361.2203, dir::PY},
-        {"Side Rail", 5, 2538.75 * 2, dir::PY},
-        {"OAB", 3, 1977.1523, dir::PY},
+        {"Back Plate (COM)",             1, 7380.0363,                          dir::PY},
+        {"Shield (COM)",                 2, 6361.2203,                          dir::PY},
+        {"Side Rail",                    5, 2538.75 * 2,                        dir::PY},
+        {"OAB",                          3, 1977.1523,                          dir::PY},
 
-        {"Side Rail", 5, 2538.75 * 2, dir::PX},
-        {"OAB", 3, 1977.1523, dir::PX},
-        {"Fixed Solar Cells (FSC)", 4, 3017.75 * 7, dir::PX},
-        {"Deployable Solar Cells (DSC)", 4, 3017.75 * 12, dir::PX},
-        {"Back Plate (FSC)", 1, 25060.1199 - 3017.75 * 7, dir::PX},
-        {"Back Plate (DSC)", 2, 2 * 23210.7363 - 3017.75 * 12, dir::PX},
+        {"Side Rail",                    5, 2538.75 * 2,                        dir::PX},
+        {"OAB",                          3, 1977.1523,                          dir::PX},
+        {"Fixed Solar Cells (FSC)",      4, 3017.75 * 7,                        dir::PX},
+        {"Deployable Solar Cells (DSC)", 4, 3017.75 * 12,                       dir::PX},
+        {"Back Plate (FSC)",             1, 25060.1199 - 3017.75 * 7,           dir::PX},
+        {"Back Plate (DSC)",             2, 2 * 23210.7363 - 3017.75 * 12,      dir::PX},
 
-        {"Side Rail", 5, 2538.75 * 2, dir::NY},
-        {"OAB", 3, 1977.1523, dir::NY},
-        {"Back Plate", 2, 23004.8134, dir::NY},
+        {"Side Rail",                    5, 2538.75 * 2,                        dir::NY},
+        {"OAB",                          3, 1977.1523,                          dir::NY},
+        {"Back Plate",                   2, 23004.8134,                         dir::NY},
 
-        {"Side Rail", 5, 2538.75 * 2, dir::NX},
-        {"OAB", 3, 1977.1523, dir::NX},
-        {"FSC", 4, 3017.75 * 7, dir::NX},
-        {"Back Plate (FSC)", 1, 25060.1199 - 3017.75 * 7, dir::NX},
-        {"Back Plate (DSC)", 2, 23004.8134 * 2, dir::NX},
+        {"Side Rail",                    5, 2538.75 * 2,                        dir::NX},
+        {"OAB",                          3, 1977.1523,                          dir::NX},
+        {"FSC",                          4, 3017.75 * 7,                        dir::NX},
+        {"Back Plate (FSC)",             1, 25060.1199 - 3017.75 * 7,           dir::NX},
+        {"Back Plate (DSC)",             2, 23004.8134 * 2,                     dir::NX},
 
-        {"Chorus Shield", 2, 8478.2977, dir::PZ},
+        {"Chorus Shield",                2, 8478.2977,                          dir::PZ},
 
-        {"Top Frame + Camera housing", 3, 1975.8099 + 6653.7694, dir::NZ}
+        {"Top Frame + Camera housing",   3, 1975.8099 + 6653.7694,              dir::NZ}
     };
 
     Solver solver(surfaces, materials);
@@ -172,13 +172,15 @@ int main()
         std::cout << "===========================================================\n\n";
     }
 
+    convergents.close();
+
     std::vector<std::pair<std::string, Vec3>> test_dirs = {
-        {"+X face illuminated", {-1.0,  0.0,  0.0}},
-        {"-X face illuminated", { 1.0,  0.0,  0.0}},
-        {"+Y face illuminated", { 0.0, -1.0,  0.0}},
-        {"-Y face illuminated", { 0.0,  1.0,  0.0}},
-        {"+Z face illuminated", { 0.0,  0.0, -1.0}},
-        {"-Z face illuminated", { 0.0,  0.0,  1.0}}
+        {"+X", {-1.0,  0.0,  0.0}},
+        {"-X", { 1.0,  0.0,  0.0}},
+        {"+Y", { 0.0, -1.0,  0.0}},
+        {"-Y", { 0.0,  1.0,  0.0}},
+        {"+Z", { 0.0,  0.0, -1.0}},
+        {"-Z", { 0.0,  0.0,  1.0}}
     };
 
     std::cout << "\n===== PRINCIPAL DIRECTIONS =====\n";
@@ -194,8 +196,6 @@ int main()
 
         std::cout << name << " : q = " << R_eff << '\n';
     }
-
-    convergents.close();
 
     return 0;
 }
