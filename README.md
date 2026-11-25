@@ -1,11 +1,7 @@
 # Effective Solar Reflectance Factor — [ROSPIN-SAT-1](https://www.rospin.org/rospin-sat-1)
 
 <p align="center">
-  <img src="results/plots/03_reflectance_mollweide.png" width="900">
-</p>
-
-<p align="center">
-  <i>Directional distribution of the effective spacecraft reflectance over uniformly sampled solar propagation directions.</i>
+  <img src="results/plots/01_reflectance_histogram.png">
 </p>
 
 ## Overview
@@ -19,27 +15,11 @@ The model combines wavelength-dependent Fresnel reflection, ASTM E490 AM0 solar 
 
 ## Main Result
 
-For **100,000 sampled solar propagation directions**:
-
-| Quantity | Value |
-|---|---:|
-| Mean reflectance | **0.667812** |
-| Median | 0.723773 |
-| 95th percentile | 0.904695 |
-
-### Nominal effective reflectance
-
-**q_nominal ≈ 0.67**
-
-For the simplified SRP formulation used in this work:
-
-**CR = 1 + q ≈ 1.67**
+For **100,000 sampled solar propagation directions**, the model produced a **mean effective reflectance of 0.667812**, with a **median value of 0.723773**. The **95th percentile was 0.904695**, meaning that approximately 95% of the sampled illumination directions resulted in an effective reflectance below this value.
 
 ## Technical Report
 
-The complete derivation, numerical methodology, spacecraft geometry, verification procedure, results, and limitations are presented in:
-
-### [Numerical Estimation of the Effective Solar Reflectance Factor](ROSPIN-SAT-1_Effective_Reflectance_Analysis.pdf)
+The complete derivation, numerical methodology, spacecraft geometry, verification procedure, results, and limitations are presented in: [Numerical Estimation of the Effective Solar Reflectance Factor](ROSPIN-SAT-1_Effective_Reflectance_Analysis.pdf).
 
 *ROSPIN-SAT-1 Technical Analysis Report*
 
