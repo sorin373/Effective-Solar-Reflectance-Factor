@@ -19,7 +19,7 @@ For **100,000 sampled solar propagation directions**, the model produced a **mea
 
 ## Technical Report
 
-The complete derivation, numerical methodology, spacecraft geometry, verification procedure, results, and limitations are presented in: [Numerical Estimation of the Effective Solar Reflectance Factor](ROSPIN-SAT-1_Effective_Reflectance_Analysis.pdf).
+The complete derivation, numerical methodology, spacecraft geometry, verification procedure, results, and limitations are presented in: [Numerical Estimation of the Effective Solar Reflectance Factor](ROSPIN-SAT-1_Effective_Reflectance_Analysis.pdf) and the derived [physics model](Physics_Model.pdf).
 
 *ROSPIN-SAT-1 Technical Analysis Report*
 
