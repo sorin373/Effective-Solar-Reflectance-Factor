@@ -1,7 +1,7 @@
 # Effective Solar Reflectance Factor — [ROSPIN-SAT-1](https://www.rospin.org/rospin-sat-1)
 
 <p align="center">
-  <img src="results/plots/01_reflectance_histogram.png">
+  <img src="results/plots/03_reflectance_mollweide.png">
 </p>
 
 ## Overview
