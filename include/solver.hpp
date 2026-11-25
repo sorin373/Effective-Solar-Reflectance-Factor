@@ -21,14 +21,14 @@ namespace sim
 
     namespace dir
     {
-        constexpr Vec3 PX{ 1.0,  0.0,  0.0};
-        constexpr Vec3 NX{-1.0,  0.0,  0.0};
+        constexpr Vec3 PX{ 1.0, 0.0, 0.0};
+        constexpr Vec3 NX{-1.0, 0.0, 0.0};
 
-        constexpr Vec3 PY{ 0.0,  1.0,  0.0};
-        constexpr Vec3 NY{ 0.0, -1.0,  0.0};
+        constexpr Vec3 PY{0.0, 1.0, 0.0};
+        constexpr Vec3 NY{0.0, -1.0, 0.0};
 
-        constexpr Vec3 PZ{ 0.0,  0.0,  1.0};
-        constexpr Vec3 NZ{ 0.0,  0.0, -1.0};
+        constexpr Vec3 PZ{0.0, 0.0, 1.0};
+        constexpr Vec3 NZ{0.0, 0.0, -1.0};
     }
 
     double dot(const Vec3 &a, const Vec3 &b);

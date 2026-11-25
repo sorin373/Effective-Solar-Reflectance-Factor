@@ -155,7 +155,7 @@ namespace sim
             if (material.ID == material_ID)
                 return material;
 
-        throw std::runtime_error("Prepared material not found: " + std::to_string(material_ID));
+        throw std::runtime_error("Material not found: " + std::to_string(material_ID));
     }
 
     double Solver::get_surface_R(const Surface& surface, std::size_t spectral_index)
